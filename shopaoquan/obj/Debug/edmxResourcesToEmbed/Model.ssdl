@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SHOPAOQUANModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="id_brand" />
+    </Key>
+    <Property Name="id_brand" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="brand_name" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id_cate" />
+    </Key>
+    <Property Name="id_cate" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cate_name" Type="nvarchar(max)" />
+    <Property Name="describe" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="id_product" />
+    </Key>
+    <Property Name="stt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_product" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="name_product" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="images" Type="varchar" MaxLength="255" />
+    <Property Name="price_new" Type="decimal" Precision="10" Scale="0" />
+    <Property Name="price_old" Type="decimal" Precision="10" Scale="0" />
+    <Property Name="describe" Type="nvarchar(max)" />
+    <Property Name="quantity" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="id_subcate" Type="char" MaxLength="4" />
+    <Property Name="id_brand" Type="int" />
+  </EntityType>
+  <EntityType Name="sale">
+    <Key>
+      <PropertyRef Name="id_sale" />
+    </Key>
+    <Property Name="id_sale" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="price_sale" Type="decimal" Precision="10" Scale="0" />
+    <Property Name="sale_off" Type="int" />
+    <Property Name="id_product" Type="char" MaxLength="4" />
+  </EntityType>
+  <EntityType Name="size">
+    <Key>
+      <PropertyRef Name="id_size" />
+    </Key>
+    <Property Name="id_size" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="size" Type="char" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="subCategory">
+    <Key>
+      <PropertyRef Name="id_subcate" />
+    </Key>
+    <Property Name="stt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_subcate" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="name_subcate" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="id_cate" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="name_user" Type="nvarchar" MaxLength="50" />
+    <Property Name="phonenumber" Type="varchar" MaxLength="10" />
+    <Property Name="pass" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <Association Name="FK__product__id_bran__44FF419A">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="id_brand" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="id_brand" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product__id_subc__440B1D61">
+    <End Role="subCategory" Type="Self.subCategory" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subCategory">
+        <PropertyRef Name="id_subcate" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="id_subcate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sale__id_product__47DBAE45">
+    <End Role="product" Type="Self.product" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="sale" Type="Self.sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="id_product" />
+      </Principal>
+      <Dependent Role="sale">
+        <PropertyRef Name="id_product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__subCatego__id_ca__3F466844">
+    <End Role="Category" Type="Self.Category" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="subCategory" Type="Self.subCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="id_cate" />
+      </Principal>
+      <Dependent Role="subCategory">
+        <PropertyRef Name="id_cate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SHOPAOQUANModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Brand" EntityType="Self.Brand" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sale" EntityType="Self.sale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="size" EntityType="Self.size" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subCategory" EntityType="Self.subCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__product__id_bran__44FF419A" Association="Self.FK__product__id_bran__44FF419A">
+      <End Role="Brand" EntitySet="Brand" />
+      <End Role="product" EntitySet="product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product__id_subc__440B1D61" Association="Self.FK__product__id_subc__440B1D61">
+      <End Role="subCategory" EntitySet="subCategory" />
+      <End Role="product" EntitySet="product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sale__id_product__47DBAE45" Association="Self.FK__sale__id_product__47DBAE45">
+      <End Role="product" EntitySet="product" />
+      <End Role="sale" EntitySet="sale" />
+    </AssociationSet>
+    <AssociationSet Name="FK__subCatego__id_ca__3F466844" Association="Self.FK__subCatego__id_ca__3F466844">
+      <End Role="Category" EntitySet="Category" />
+      <End Role="subCategory" EntitySet="subCategory" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

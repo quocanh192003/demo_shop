@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SHOPAOQUANModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="id_brand" />
+    </Key>
+    <Property Name="id_brand" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="brand_name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="products" Relationship="Self.FK__product__id_bran__44FF419A" FromRole="Brand" ToRole="product" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="id_cate" />
+    </Key>
+    <Property Name="id_cate" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cate_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="subCategories" Relationship="Self.FK__subCatego__id_ca__3F466844" FromRole="Category" ToRole="subCategory" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="id_product" />
+    </Key>
+    <Property Name="stt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_product" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="name_product" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="images" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="price_new" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="price_old" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="describe" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="quantity" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="id_subcate" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="id_brand" Type="Int32" />
+    <NavigationProperty Name="Brand" Relationship="Self.FK__product__id_bran__44FF419A" FromRole="product" ToRole="Brand" />
+    <NavigationProperty Name="subCategory" Relationship="Self.FK__product__id_subc__440B1D61" FromRole="product" ToRole="subCategory" />
+    <NavigationProperty Name="sales" Relationship="Self.FK__sale__id_product__47DBAE45" FromRole="product" ToRole="sale" />
+  </EntityType>
+  <EntityType Name="sale">
+    <Key>
+      <PropertyRef Name="id_sale" />
+    </Key>
+    <Property Name="id_sale" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="price_sale" Type="Decimal" Precision="10" Scale="0" />
+    <Property Name="sale_off" Type="Int32" />
+    <Property Name="id_product" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="product" Relationship="Self.FK__sale__id_product__47DBAE45" FromRole="sale" ToRole="product" />
+  </EntityType>
+  <EntityType Name="size">
+    <Key>
+      <PropertyRef Name="id_size" />
+    </Key>
+    <Property Name="id_size" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="size1" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
+  </EntityType>
+  <EntityType Name="subCategory">
+    <Key>
+      <PropertyRef Name="id_subcate" />
+    </Key>
+    <Property Name="stt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_subcate" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="name_subcate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_cate" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="Self.FK__subCatego__id_ca__3F466844" FromRole="subCategory" ToRole="Category" />
+    <NavigationProperty Name="products" Relationship="Self.FK__product__id_subc__440B1D61" FromRole="subCategory" ToRole="product" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id_user" />
+    </Key>
+    <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="name_user" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="phonenumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="pass" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="roles" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="name_roles" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__product__id_bran__44FF419A">
+    <End Role="Brand" Type="Self.Brand" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="id_brand" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="id_brand" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__subCatego__id_ca__3F466844">
+    <End Role="Category" Type="Self.Category" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="subCategory" Type="Self.subCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="id_cate" />
+      </Principal>
+      <Dependent Role="subCategory">
+        <PropertyRef Name="id_cate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__product__id_subc__440B1D61">
+    <End Role="subCategory" Type="Self.subCategory" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="product" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="subCategory">
+        <PropertyRef Name="id_subcate" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="id_subcate" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__sale__id_product__47DBAE45">
+    <End Role="product" Type="Self.product" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="sale" Type="Self.sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="id_product" />
+      </Principal>
+      <Dependent Role="sale">
+        <PropertyRef Name="id_product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="SHOPAOQUANEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Brands" EntityType="Self.Brand" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <EntitySet Name="sales" EntityType="Self.sale" />
+    <EntitySet Name="sizes" EntityType="Self.size" />
+    <EntitySet Name="subCategories" EntityType="Self.subCategory" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK__product__id_bran__44FF419A" Association="Self.FK__product__id_bran__44FF419A">
+      <End Role="Brand" EntitySet="Brands" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__subCatego__id_ca__3F466844" Association="Self.FK__subCatego__id_ca__3F466844">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="subCategory" EntitySet="subCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__product__id_subc__440B1D61" Association="Self.FK__product__id_subc__440B1D61">
+      <End Role="subCategory" EntitySet="subCategories" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__sale__id_product__47DBAE45" Association="Self.FK__sale__id_product__47DBAE45">
+      <End Role="product" EntitySet="products" />
+      <End Role="sale" EntitySet="sales" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,183 @@
+﻿
+@{
+    Layout = null;
+}
+@using shopaoquan.Models;
+<div class="col-xs-12 col-sm-12 col-md-3 sidebar">
+
+    <!-- ================================== TOP NAVIGATION ================================== -->
+    <!-- /.side-menu -->
+    <!-- ================================== TOP NAVIGATION : END ================================== -->
+    <!-- ============================================== PRODUCT TAGS ============================================== -->
+    <!-- /.sidebar-widget -->
+    <!-- ============================================== PRODUCT TAGS : END ============================================== -->
+    <!-- ============================================== HOT DEALS ============================================== -->
+    <div class="sidebar-widget hot-deals wow fadeInUp outer-bottom-xs">
+        <h3 class="section-title">Ưu đãi lớn</h3>
+
+        <div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-ss">
+            @foreach (var sale in ViewBag.cate)
+            {
+                <div class="item">
+                    <div class="products">
+                        <div class="hot-deal-wrapper">
+                            <div class="image"> <img src="~/assets/images/products/@sale.cate_name" alt="ảnh sale" style="height:350px;"> </div>
+                            <div class="sale-offer-tag">
+                                <span>
+                                    @sale.cate_name%<br>
+                                    off
+                                </span>
+                            </div>
+
+                        </div>
+                        <!-- /.hot-deal-wrapper -->
+
+                        <div class="product-info text-left m-t-20">
+                            <h3 class="name"><a href="detail.html">@sale.cate_name</a></h3>
+                            <div class="rating rateit-small"></div>
+                            <div class="product-price"> <span class="price"> @sale.cate_name </span> <span class="price-before-discount"> @sale.cate_name </span> </div>
+                            <!-- /.product-price -->
+
+                        </div>
+                        <!-- /.product-info -->
+
+                        <div class="cart clearfix animate-effect">
+                            <div class="action">
+                                <div class="add-cart-button btn-group">
+                                    <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+                                    <button class="btn btn-primary cart-btn" type="button">Thêm vào giỏ hàng</button>
+                                </div>
+                            </div>
+                            <!-- /.action -->
+                        </div>
+                        <!-- /.cart -->
+                    </div>
+                </div>
+            }
+
+        </div>
+        <!-- /.sidebar-widget -->
+    </div>
+    <!-- ============================================== HOT DEALS: END ============================================== -->
+    <!-- ============================================== SPECIAL OFFER ============================================== -->
+
+    <div class="sidebar-widget outer-bottom-small wow fadeInUp">
+        <h3 class="section-title">Gợi ý cho bạn</h3>
+        <div class="sidebar-widget-body outer-top-xs">
+            <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
+
+                @foreach (var random in ViewBag.cate)
+                {
+                    <div class="item">
+                        <div class="products special-product">
+                            <div class="product">
+                                <div class="product-micro">
+                                    <div class="row product-micro-row">
+                                        <div class="col col-xs-5">
+                                            <div class="product-image">
+                                                <div class="image"> <a href="#"> <img src="~/assets/images/products/@random.cate_name" alt="ảnh" style="height:100px;"> </a> </div>
+                                                <!-- /.image -->
+
+                                            </div>
+                                            <!-- /.product-image -->
+                                        </div>
+                                        <!-- /.col -->
+                                        <div class="col col-xs-7">
+                                            <div class="product-info">
+                                                <h3 class="name"><a href="#">@random.cate_name</a></h3>
+                                                <div class="rating rateit-small"></div>
+                                                <div class="product-price"> <span class="price">@random.cate_name </span> </div>
+                                                <!-- /.product-price -->
+
+                                            </div>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.product-micro-row -->
+                                </div>
+                                <!-- /.product-micro -->
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <!-- /.sidebar-widget-body -->
+    </div>
+    <!-- /.sidebar-widget -->
+    <!-- ============================================== SPECIAL OFFER : END ============================================== -->
+    <!-- ============================================== SPECIAL DEALS ============================================== -->
+
+    <div class="sidebar-widget outer-bottom-small wow fadeInUp">
+        <h3 class="section-title">Xu hướng</h3>
+        <div class="sidebar-widget-body outer-top-xs">
+            <div class="owl-carousel sidebar-carousel special-offer custom-carousel owl-theme outer-top-xs">
+
+                @foreach (var random in ViewBag.cate)
+                {
+                    <div class="item">
+                        <div class="products special-product">
+                            <div class="product">
+                                <div class="product-micro">
+                                    <div class="row product-micro-row">
+                                        <div class="col col-xs-5">
+                                            <div class="product-image">
+                                                <div class="image"> <a href="#"> <img src="~/assets/images/products/@random.cate_name" alt="" style="height: 150px;"> </a> </div>
+                                                <!-- /.image -->
+
+                                            </div>
+                                            <!-- /.product-image -->
+                                        </div>
+                                        <!-- /.col -->
+                                        <div class="col col-xs-7">
+                                            <div class="product-info">
+                                                <h3 class="name"><a href="#">@random.cate_name</a></h3>
+                                                <div class="rating rateit-small"></div>
+                                                <div class="product-price"> <span class="price"> @random.cate_name</span> </div>
+                                                <!-- /.product-price -->
+
+                                            </div>
+                                        </div>
+                                        <!-- /.col -->
+                                    </div>
+                                    <!-- /.product-micro-row -->
+                                </div>
+                                <!-- /.product-micro -->
+
+                            </div>
+
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+        <!-- /.sidebar-widget-body -->
+    </div>
+    <!-- /.sidebar-widget -->
+    <!-- ============================================== SPECIAL DEALS : END ============================================== -->
+    <!-- ============================================== NEWSLETTER ============================================== -->
+    <div class="sidebar-widget newsletter wow fadeInUp outer-bottom-small">
+        <h3 class="section-title">Bản tin</h3>
+        <div class="sidebar-widget-body outer-top-xs">
+            <p>Đăng ký nhận bản tin của chúng tôi!</p>
+            <form>
+                <div class="form-group">
+                    <label class="sr-only" for="exampleInputEmail1">Địa chỉ Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Theo dõi bản tin của chúng tôi">
+                </div>
+                <button class="btn btn-primary">Theo dõi</button>
+            </form>
+        </div>
+        <!-- /.sidebar-widget-body -->
+    </div>
+    <!-- /.sidebar-widget -->
+    <!-- ============================================== NEWSLETTER: END ============================================== -->
+    <!-- ============================================== Testimonials============================================== -->
+    <!-- ============================================== Testimonials: END ============================================== -->
+
+
+</div>
+@RenderBody()

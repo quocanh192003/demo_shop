@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SHOPAOQUANModelStoreContainer" CdmEntityContainer="SHOPAOQUANEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="SHOPAOQUANModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Brands">
+      <EntityTypeMapping TypeName="SHOPAOQUANModel.Brand">
+        <MappingFragment StoreEntitySet="Brand">
+          <ScalarProperty Name="id_brand" ColumnName="id_brand" />
+          <ScalarProperty Name="brand_name" ColumnName="brand_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="SHOPAOQUANModel.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="id_cate" ColumnName="id_cate" />
+          <ScalarProperty Name="cate_name" ColumnName="cate_name" />
+          <ScalarProperty Name="describe" ColumnName="describe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="SHOPAOQUANModel.product">
+        <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="stt" ColumnName="stt" />
+          <ScalarProperty Name="id_product" ColumnName="id_product" />
+          <ScalarProperty Name="name_product" ColumnName="name_product" />
+          <ScalarProperty Name="images" ColumnName="images" />
+          <ScalarProperty Name="price_new" ColumnName="price_new" />
+          <ScalarProperty Name="price_old" ColumnName="price_old" />
+          <ScalarProperty Name="describe" ColumnName="describe" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="id_subcate" ColumnName="id_subcate" />
+          <ScalarProperty Name="id_brand" ColumnName="id_brand" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sales">
+      <EntityTypeMapping TypeName="SHOPAOQUANModel.sale">
+        <MappingFragment StoreEntitySet="sale">
+          <ScalarProperty Name="id_sale" ColumnName="id_sale" />
+          <ScalarProperty Name="price_sale" ColumnName="price_sale" />
+          <ScalarProperty Name="sale_off" ColumnName="sale_off" />
+          <ScalarProperty Name="id_product" ColumnName="id_product" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sizes">
+      <EntityTypeMapping TypeName="SHOPAOQUANModel.size">
+        <MappingFragment StoreEntitySet="size">
+          <ScalarProperty Name="id_size" ColumnName="id_size" />
+          <ScalarProperty Name="size1" ColumnName="size" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subCategories">
+      <EntityTypeMapping TypeName="SHOPAOQUANModel.subCategory">
+        <MappingFragment StoreEntitySet="subCategory">
+          <ScalarProperty Name="stt" ColumnName="stt" />
+          <ScalarProperty Name="id_subcate" ColumnName="id_subcate" />
+          <ScalarProperty Name="name_subcate" ColumnName="name_subcate" />
+          <ScalarProperty Name="id_cate" ColumnName="id_cate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="SHOPAOQUANModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="name_roles" ColumnName="name_roles" />
+          <ScalarProperty Name="roles" ColumnName="roles" />
+          <ScalarProperty Name="id_user" ColumnName="id_user" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="name_user" ColumnName="name_user" />
+          <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
+          <ScalarProperty Name="pass" ColumnName="pass" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
