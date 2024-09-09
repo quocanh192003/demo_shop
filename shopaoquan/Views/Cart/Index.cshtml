@@ -27,7 +27,15 @@
                                         <div class="shopping-cart-btn">
                                             <span class="">
 
-                                                <a href="~/Payment/Payment" class="btn btn-upper btn-primary pull-right outer-right-xs">Mua Hàng</a>
+                                                <a href="@Url.Action("Payment", "Payment")" class="btn btn-upper btn-primary pull-right outer-right-xs">Mua Hàng</a>
+                                                @*<script>
+                                                    $(document).ready(function () {
+                                                        $("#btnMuahang").click(function () {
+                                                            window.location.href = "@Url.Action("Payment", "Payment")";
+                                                        });
+                                                    });
+                                                </script>*@
+
                                             </span>
                                         </div><!-- /.shopping-cart-btn -->
                                     </td>

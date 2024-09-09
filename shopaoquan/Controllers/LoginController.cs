@@ -64,7 +64,7 @@ namespace shopaoquan.Controllers
                 {
                     
                     Session["user"] = check.name_user;
-
+                    Session["Id"] = check.id_user;
                     
                     return RedirectToAction("Index", "Home");
                 }

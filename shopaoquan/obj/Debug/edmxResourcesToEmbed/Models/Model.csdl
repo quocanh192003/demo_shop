@@ -1,15 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="SHOPAOQUANModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="C__MigrationHistory">
-    <Key>
-      <PropertyRef Name="MigrationId" />
-      <PropertyRef Name="ContextKey" />
-    </Key>
-    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
-    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
-  </EntityType>
   <EntityType Name="Brand">
     <Key>
       <PropertyRef Name="id_brand" />
@@ -44,6 +34,7 @@
     <NavigationProperty Name="Brand" Relationship="Self.FK__product__id_bran__44FF419A" FromRole="product" ToRole="Brand" />
     <NavigationProperty Name="subCategory" Relationship="Self.FK__product__id_subc__440B1D61" FromRole="product" ToRole="subCategory" />
     <NavigationProperty Name="sales" Relationship="Self.FK__sale__id_product__47DBAE45" FromRole="product" ToRole="sale" />
+    <NavigationProperty Name="OrderDetails" Relationship="SHOPAOQUANModel.FK__OrderDeta__Produ__1F98B2C1" FromRole="product" ToRole="OrderDetail" />
   </EntityType>
   <EntityType Name="sale">
     <Key>
@@ -142,7 +133,6 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="SHOPAOQUANEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
     <EntitySet Name="Brands" EntityType="Self.Brand" />
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="products" EntityType="Self.product" />
@@ -166,5 +156,73 @@
       <End Role="product" EntitySet="products" />
       <End Role="sale" EntitySet="sales" />
     </AssociationSet>
+    <EntitySet Name="Orders" EntityType="SHOPAOQUANModel.Order" />
+    <EntitySet Name="OrderDetails" EntityType="SHOPAOQUANModel.OrderDetail" />
+    <EntitySet Name="roles" EntityType="SHOPAOQUANModel.role" />
+    <AssociationSet Name="FK__OrderDeta__IdOrd__1EA48E88" Association="SHOPAOQUANModel.FK__OrderDeta__IdOrd__1EA48E88">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Produ__1F98B2C1" Association="SHOPAOQUANModel.FK__OrderDeta__Produ__1F98B2C1">
+      <End Role="product" EntitySet="products" />
+      <End Role="OrderDetail" EntitySet="OrderDetails" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="UserID" Type="Int32" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="CreatedOnUtc" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="OrderDetails" Relationship="SHOPAOQUANModel.FK__OrderDeta__IdOrd__1EA48E88" FromRole="Order" ToRole="OrderDetail" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdOrder" Type="Int32" />
+    <Property Name="ProductId" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="Quantity" Type="Int32" />
+    <NavigationProperty Name="Order" Relationship="SHOPAOQUANModel.FK__OrderDeta__IdOrd__1EA48E88" FromRole="OrderDetail" ToRole="Order" />
+    <NavigationProperty Name="product" Relationship="SHOPAOQUANModel.FK__OrderDeta__Produ__1F98B2C1" FromRole="OrderDetail" ToRole="product" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="id_role" />
+    </Key>
+    <Property Name="id_role" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <Property Name="name_role" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__OrderDeta__IdOrd__1EA48E88">
+    <End Type="SHOPAOQUANModel.Order" Role="Order" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="SHOPAOQUANModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="IdOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Produ__1F98B2C1">
+    <End Type="SHOPAOQUANModel.product" Role="product" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="SHOPAOQUANModel.OrderDetail" Role="OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="id_product" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ProductId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

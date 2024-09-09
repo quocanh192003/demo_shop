@@ -15,11 +15,20 @@ namespace shopaoquan.Areas.Admin.Controllers
         private SHOPAOQUANEntities db = new SHOPAOQUANEntities();
 
         // GET: Admin/Users
-        public ActionResult Index()
+        public ActionResult Index(string searhstring)
         {
             List<Category> cate = db.Categories.ToList();
 
             ViewBag.cate = cate;
+            var key = from l in db.Users // lấy toàn bộ liên kết
+                        select l;
+
+            if (!String.IsNullOrEmpty(searhstring)) // kiểm tra chuỗi tìm kiếm có rỗng/null hay không
+            {
+                key = key.Where(s => s.name_user.Contains(searhstring)); //lọc theo chuỗi tìm kiếm
+            }
+
+            return View(key); //trả về kết quả
             return View(db.Users.ToList());
         }
 

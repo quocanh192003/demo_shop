@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Mvc.Async;
 using shopaoquan.Models;
 namespace shopaoquan.Controllers
 {
@@ -17,6 +19,7 @@ namespace shopaoquan.Controllers
             List<subCategory> subcate = db.subCategories.ToList();
             List<product> spnhieu = sanphamnhieu(20);
             
+
 
             /*Lấy ra sản phẩm có số lượng nhiều nhất*/
             List<product> sanphamnhieu(int count)
@@ -46,7 +49,6 @@ namespace shopaoquan.Controllers
 
             List<product> price_big = GetTopNProductsPerSubcategory(db,5);
 
-
             ViewBag.price_big = price_big;
             ViewBag.product = product;
             ViewBag.sale = sale(3);
@@ -56,8 +58,6 @@ namespace shopaoquan.Controllers
             ViewBag.spnhieu = spnhieu;
             ViewBag.randomproduct = randomsp(9);
             return View();
-
-            
         }
 
         /* Lấy ra 5 sp có giá cao nhất*/
@@ -67,8 +67,22 @@ namespace shopaoquan.Controllers
             List<product> price_big = db.Database.SqlQuery<product>("select * from dbo.GetTopNProductsPerSubcategory(@N)", parameter).ToList();
             return price_big;
         }
-        
 
-        
+        //Search key
+
+        [HttpGet]
+        public ActionResult Search(string searchstring)
+        {
+            var products = db.products.AsQueryable();
+            if (!string.IsNullOrEmpty(searchstring))
+            {
+                products = products.Where(p => p.name_product.Contains(searchstring) || p.describe.Contains(searchstring));
+                return View("Index", products.ToList());
+            }
+
+            ViewBag.message = "Vui lòng nhập từ khóa để tìm kiếm.";
+            return View("Index");
+        }
+
     }
 }

@@ -25,7 +25,6 @@ namespace shopaoquan.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<C__MigrationHistory> C__MigrationHistory { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<product> products { get; set; }
@@ -33,5 +32,8 @@ namespace shopaoquan.Models
         public virtual DbSet<size> sizes { get; set; }
         public virtual DbSet<subCategory> subCategories { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+        public virtual DbSet<role> roles { get; set; }
     }
 }

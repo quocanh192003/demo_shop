@@ -11,13 +11,9 @@ namespace shopaoquan.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-
+    
     public partial class User
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id_user { get; set; }
         public string email { get; set; }
         public string name_user { get; set; }

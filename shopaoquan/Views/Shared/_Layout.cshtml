@@ -186,7 +186,7 @@
                         <!-- /.contact-row -->
                         <!-- ============================================================= SEARCH AREA ============================================================= -->
                         <div class="search-area">
-                            <form>
+                            <form method="get" asp-controller="Home" action="Search">
                                 <div class="control-group">
                                     <ul class="categories-filter animate-dropdown">
                                         <li class="dropdown">
@@ -203,8 +203,8 @@
                                         </li>
                                     </ul>
 
-                                    <input class="search-field" placeholder="Nhập từ khoá tìm kiếm...">
-                                    <a class="search-button" href="#"></a>
+                                    <input class="search-field" placeholder="Nhập từ khoá tìm kiếm..." name="searchstring">
+                                    <input class="search-button" type="submit">
                                 </div>
                             </form>
                         </div>

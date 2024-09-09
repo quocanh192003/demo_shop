@@ -18,6 +18,7 @@ namespace shopaoquan.Models
         public product()
         {
             this.sales = new HashSet<sale>();
+            this.OrderDetails = new HashSet<OrderDetail>();
         }
     
         public int stt { get; set; }
@@ -35,5 +36,7 @@ namespace shopaoquan.Models
         public virtual subCategory subCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<sale> sales { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }
